@@ -2,8 +2,10 @@
 #include <string>
 using namespace std;
 
-
-int main (){
-    cout << "This is  main file. ";
-	return 0;
+int main() {
+  cout << "This is  main file. ";
+  string name;
+  cin >> name;
+  cout << name;
+  return 0;
 }
