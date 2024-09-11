@@ -1,4 +1,3 @@
-use std::u8;
 // function
 fn fib(num: u32) -> u32 {
     if num == 0 {
@@ -65,6 +64,19 @@ fn area(shape: Shape) -> f32 {
     }
 }
 
+//Option/Result Enums;
+
+// Option Enum lets us return a number or null
+
+fn find_first_a(s: String) -> Option<i32> {
+    for (index, char) in s.chars().enumerate() {
+        if char == 'a' {
+            return Some(index as i32);
+        }
+    }
+    return None;
+}
+
 fn main() {
     println!("{}", fib(11));
     println!("the length of the string is: {}", str_len("Ajay Upadhyay"));
@@ -98,5 +110,10 @@ fn main() {
         area(rect),
         area(sq),
         area(cir)
-    )
+    );
+    let index = find_first_a(String::from("Ajay Upadhyay"));
+    match index {
+        Some(value) => println!("index is: {}", value),
+        None => println!("a not found"),
+    }
 }
