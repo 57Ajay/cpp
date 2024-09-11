@@ -1,0 +1,8 @@
+CompileFlags:
+  Add: [
+    -I"C:/msys64/mingw64/include",
+    -I"C:/msys64/mingw64/include/c++/14.2.0",
+    -I"C:/msys64/mingw64/include/c++/14.2.0/backward",
+    -I"C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include",
+    -I"C:/msys64/mingw64/x86_64-w64-mingw32/include"
+  ]

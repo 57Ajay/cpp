@@ -1,6 +1,6 @@
+#include <chrono>
 #include <iostream>
 #include <string>
-#include <chrono>
 
 using namespace std;
 
@@ -32,22 +32,32 @@ int main() {
     cout << "Enter the character to find its index: ";
     cin >> s;
 
-    //Execution time for charIndex
+    // Execution time for charIndex
     auto start_time_charIndex = chrono::high_resolution_clock::now();
     int idx = charIndex(str, s);
     auto end_time_charIndex = chrono::high_resolution_clock::now();
-    double elapsed_time_charIndex = chrono::duration_cast<chrono::microseconds>(end_time_charIndex - start_time_charIndex).count() / 1e6;
+    double elapsed_time_charIndex =
+        chrono::duration_cast<chrono::microseconds>(end_time_charIndex -
+                                                    start_time_charIndex)
+            .count() /
+        1e6;
 
-    //Execution time for charIndexEfficient
+    // Execution time for charIndexEfficient
     auto start_time_efficient = chrono::high_resolution_clock::now();
     string result = charIndexEfficient(str, s);
     auto end_time_efficient = chrono::high_resolution_clock::now();
-    double elapsed_time_efficient = chrono::duration_cast<chrono::microseconds>(end_time_efficient - start_time_efficient).count() / 1e6;
+    double elapsed_time_efficient =
+        chrono::duration_cast<chrono::microseconds>(end_time_efficient -
+                                                    start_time_efficient)
+            .count() /
+        1e6;
 
     cout << "charIndex: => The index of " << s << " is at " << idx << endl;
-    cout << "charIndex time: " << elapsed_time_charIndex << " milliseconds" << endl;
+    cout << "charIndex time: " << elapsed_time_charIndex << " milliseconds"
+         << endl;
     cout << "charIndexEfficient: => " << result << endl;
-    cout << "charIndexEfficient time: " << elapsed_time_efficient << " milliseconds" << endl;
+    cout << "charIndexEfficient time: " << elapsed_time_efficient
+         << " milliseconds" << endl;
 
     return 0;
 }
