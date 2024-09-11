@@ -12,9 +12,14 @@ fn fib(num: u32) -> u32 {
         prev = curr;
         curr = next;
     }
-    curr
+    return curr;
+}
+
+fn str_len(s: &str) -> usize {
+    return s.chars().count();
 }
 
 fn main() {
-    println!("{}", fib(20));
+    println!("{}", fib(11));
+    println!("the length of the string is: {}", str_len("Ajay is here"))
 }
