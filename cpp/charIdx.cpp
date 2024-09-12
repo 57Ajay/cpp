@@ -1,7 +1,6 @@
 #include <chrono>
 #include <iostream>
 #include <string>
-
 using namespace std;
 
 int charIndex(string str, char s) {

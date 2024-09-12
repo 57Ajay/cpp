@@ -1,3 +1,4 @@
+use std::fs;
 // function
 fn fib(num: u32) -> u32 {
     if num == 0 {
@@ -77,6 +78,18 @@ fn find_first_a(s: String) -> Option<i32> {
     return None;
 }
 
+fn read_file(file: &str) {
+    let result = fs::read_to_string(file);
+    match result {
+        Ok(file_content) => {
+            println!("file read successfully:\n {:?}", file_content)
+        }
+        Err(error) => {
+            panic!("{}", error);
+        }
+    }
+}
+
 fn main() {
     println!("{}", fib(11));
     println!("the length of the string is: {}", str_len("Ajay Upadhyay"));
@@ -116,4 +129,6 @@ fn main() {
         Some(value) => println!("index is: {}", value),
         None => println!("a not found"),
     }
+    println!("{:?}", read_file("Cargo.lock"));
+    println!("{:?}", read_file("../cpp/charIdx.cp"));
 }

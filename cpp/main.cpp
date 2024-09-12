@@ -1,16 +1,34 @@
+#include <cstddef>
 #include <iostream>
 #include <string>
 using namespace std;
 
-int main() {
-  cout << "This is  main file. ";
-  string name;
-  cin >> name;
-  cout << name;
-  int sum;
-  for (int i = 0; i < 2732; i++) {
-    sum += i;
+pair<size_t, size_t> matrix(int num, int matrix[][2], int rows, int columns) {
+  pair<size_t, size_t> result =
+  { -1,
+    -1 }
+
+  for (int i = 0; i < rows; i++) {
+    for (int j = 0; j < columns; j++) {
+      if (matrix[i][j] == num) {
+        result = {i, j};
+        return result;
+      };
+    };
   };
-  cout << sum;
+  return result;
+};
+
+int main() {
+  int matrix1[2][2] = {{2, 3}, {1, 5}};
+  auto result = matrix(3, matrix1, 2, 2);
+
+  if (result.first != (size_t)-1) {
+    cout << "The number is at i = " << result.first << ", j = " << result.second
+         << " in the matrix." << endl;
+  } else {
+    cout << "Number not found in the matrix." << endl;
+  }
+
   return 0;
 }

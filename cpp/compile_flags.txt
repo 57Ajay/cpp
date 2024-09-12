@@ -1,10 +1,5 @@
 -std=c++23
--Wall
--Wextra
--Wpedantic
--I.
--IC:\msys64\mingw64\include
--IC:\msys64\mingw64\include\c++\14.2.0
--IC:\msys64\mingw64\include\c++\14.2.0\backward
--IC:\msys64\mingw64\lib\gcc\x86_64-w64-mingw32\14.2.0\include
--IC:\msys64\mingw64\x86_64-w64-mingw32\include
+-IC:/msys64/mingw64/include
+-IC:/msys64/mingw64/include/c++/14.2.0
+-IC:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include
+
