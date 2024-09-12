@@ -1,4 +1,5 @@
 use std::fs;
+mod datetime;
 // function
 fn fib(num: u32) -> u32 {
     if num == 0 {
@@ -83,10 +84,10 @@ fn read_file(file: &str) {
     match result {
         Ok(file_content) => {
             println!("file read successfully:\n {:?}", file_content)
-        }
+        } // ok(data)=> ok(data);
         Err(error) => {
-            panic!("{}", error);
-        }
+            println!("Failed to read the file: {:?}", error)
+        } // we can also write it like Err(error)=> Err(String::from("File not read"));
     }
 }
 
@@ -130,5 +131,17 @@ fn main() {
         None => println!("a not found"),
     }
     println!("{:?}", read_file("Cargo.lock"));
-    println!("{:?}", read_file("../cpp/charIdx.cp"));
+    println!("{:?}", read_file("../cpp/charIdx.cpp"));
+    println!("{:?}", read_file("src/main.rs"));
+    // Get UTC formatted date and time
+    let formatted_time = datetime::get_formatted_time();
+    println!("Formatted UTC Date and Time: {}", formatted_time);
+
+    // Get Local date and time
+    let local_time = datetime::get_local_time();
+    println!("Local Date and Time: {}", local_time);
+
+    // Get both UTC and Local in a single call
+    let combined_time = datetime::get_dt();
+    println!("Both UTC and Local Times:\n{}", combined_time);
 }
