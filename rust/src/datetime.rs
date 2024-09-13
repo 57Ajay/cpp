@@ -19,4 +19,3 @@ pub fn get_dt() -> String {
 
     format!("UTC: {}\nLocal: {}", formatted_time, local_time)
 }
-
