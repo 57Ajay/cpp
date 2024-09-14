@@ -114,7 +114,7 @@ pub fn main() {
     println!(
         "area of the rectangle is: {}, perimeter of rectangle is: {}, is rectangle a polygon?: {}",
         rectangle.area(),
-        rectangle.perimeter(3),
+        rectangle.perimeter(2),
         Rect::polygon()
     );
     let rect = Shape::Rectangle(12.0, 89.0);
