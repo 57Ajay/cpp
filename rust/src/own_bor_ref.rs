@@ -43,7 +43,20 @@ fn print_str() -> () {
     bor_str(&s1); //Borrowing s1 and passing the reference to the bor_str
 }
 
+//*****Borrow and mutate the value*****//
+
+fn mut_str(s: &mut String) {
+    s.push_str(" mutated"); // mutating.
+}
+
+fn print_mut_str() {
+    let mut mutble_str = String::from("hello! world");
+    mut_str(&mut mutble_str); // Borrowing the string as mutable.
+    println!("{:?}", mutble_str); // This will print mutated string.
+}
+
 pub fn main() {
     println!("{:?}", str_provider());
     print_str();
+    print_mut_str();
 }

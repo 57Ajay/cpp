@@ -131,7 +131,7 @@ pub fn main() {
         Some(value) => println!("index is: {}", value),
         None => println!("a not found"),
     }
-    println!("{:?}", read_file("../cpp/charIdx.cpp"));
+    println!("{:?}", read_file("cargo.toml"));
     // Get UTC formatted date and time
     let formatted_time = datetime::get_formatted_time();
     println!("Formatted UTC Date and Time: {}", formatted_time);
