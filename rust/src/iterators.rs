@@ -97,10 +97,65 @@ fn print_results<T: Debug>(name: &str, results: T) {
     println!("{}: {:?}", name, results);
 }
 
+fn prac() {
+    let nums = vec![1, 3, 5, 7, 9];
+    let db_nums: Vec<f64> = nums.iter().map(|&x| x as f64 * 0.5).collect();
+    println!("{:?}", db_nums);
+}
+
+fn sqrt(num: f64, precision: f64) -> f64 {
+    if num < 0.0 {
+        panic!("Sqrt of the negative number is not defined.");
+    }; // using Newton-Raphson Method;
+    let mut guess = num / 2.0;
+
+    while guess * guess - num > precision {
+        guess = (guess + num / guess) / 2.0;
+    }
+    guess
+}
+
+fn mut_arr() {
+    let mut v1 = vec![2, 4, 1, 5, 7];
+    let mut_v1 = v1.iter_mut();
+    for i in mut_v1 {
+        *i = *i + 1;
+    }
+    println!("\n This is mut_arr fn: \n{:?}", v1);
+}
+
+//******Iter using next() fn******//
+fn next_iter() {
+    //for loop works under the hood like this only;
+    let arr = vec![2, 6, 7, 3, 8, 9, 1];
+    let mut arr_ = arr.iter();
+    println!("{}", "\nThis fn uses next() method\n");
+    while let Some(val) = arr_.next() {
+        println!("{:?}", val * 7);
+    }
+}
+
+// this is a more raw way to find the sum insted of for loop;
+fn sum_up_to(n: u32) -> u32 {
+    let mut sum = 0;
+    let mut iter = 1..=n;
+
+    while let Some(val) = iter.next() {
+        sum += val;
+    }
+
+    sum
+}
+
 pub fn main() {
     println!("Basic Iterators:");
     print_results("Basic iterators", basic_iters());
 
     println!("\nAdvanced Iterators:");
     print_results("Advanced iterators", adv_iters());
+    prac();
+    println!("{:?}", sqrt(9.0, 1.0));
+    mut_arr();
+    next_iter();
+    println!("Sum of natural numbers up to 100 is {}: ", sum_up_to(100));
 }
