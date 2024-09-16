@@ -1,4 +1,4 @@
-use std::fmt::Debug;
+use std::{collections::HashMap, fmt::Debug};
 
 /// Basic iterator operations
 fn basic_iters() -> (Vec<i32>, Vec<i32>, bool, Option<i32>, i32) {
@@ -147,6 +147,64 @@ fn sum_up_to(n: u32) -> u32 {
     sum
 }
 
+//*******IntoIter**********//
+
+fn iter_into() -> Vec<f64> {
+    let arr = vec![1, 3, 5, 7, 9];
+    let mut arr_: Vec<f64> = Vec::new();
+    let arr_iter = arr.into_iter();
+    println!("{}", "\n This fn uses into_iter() method: \n");
+    for val in arr_iter {
+        arr_.push(sqrt(val as f64, 0.1));
+    }
+    arr_
+}
+
+//********Consuming adaptors*********//
+
+pub fn consume_iter() {
+    let arr = vec![2, 3, 5, 7];
+    let arr_ = arr.iter();
+    let sum: i32 = arr_.sum(); // Now this sum can not be used again as sum() function consumes the
+                               // value;
+    println!("This fn uses a consuming adaptor: {}", sum);
+}
+
+//This is good but less efficient that ai won;
+fn hkirat_assignment_iter_my(arr: Vec<i32>) -> Vec<i32> {
+    let iter = arr.iter();
+    let filtered_doubled_iter = iter
+        .filter(|&&x| x % 2 == 1)
+        .copied()
+        .map(|x| x * 2)
+        .collect();
+    filtered_doubled_iter
+}
+
+// This is more efficient;
+fn hkirat_assignment_iter_ai(arr: Vec<i32>) -> Vec<i32> {
+    arr.into_iter()
+        .filter(|x| x % 2 == 1)
+        .map(|x| x * 2)
+        .collect()
+}
+
+fn iter_hsmp(map: &mut HashMap<String, i32>) -> (Vec<i32>, Vec<String>) {
+    map.insert(String::from("Ajay"), 22);
+    map.insert(String::from("Abhishek"), 21);
+    map.insert(String::from("Aman"), 20);
+    // Mutate the HashMap
+    for value in map.values_mut() {
+        *value += 10;
+    }
+
+    // Collecting keys and values into separate vectors
+    let keys: Vec<String> = map.keys().cloned().collect();
+    let values: Vec<i32> = map.values().cloned().collect();
+
+    (values, keys)
+}
+
 pub fn main() {
     println!("Basic Iterators:");
     print_results("Basic iterators", basic_iters());
@@ -158,4 +216,16 @@ pub fn main() {
     mut_arr();
     next_iter();
     println!("Sum of natural numbers up to 100 is {}: ", sum_up_to(100));
+    println!("{:?}", iter_into());
+    consume_iter();
+    println!(
+        "{:?}",
+        hkirat_assignment_iter_ai(vec![2, 5, 4, 7, 6, 8, 1, 12, 43, 64, 32, 100, 101])
+    );
+    println!(
+        "{:?}",
+        hkirat_assignment_iter_my(vec![2, 5, 4, 7, 6, 8, 1, 12, 43, 64, 32, 100, 101])
+    );
+    let mut hsmp: HashMap<String, i32> = HashMap::new();
+    println!("This is iter_hsmp fn: {:?}", iter_hsmp(&mut hsmp));
 }
