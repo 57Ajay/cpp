@@ -2,10 +2,10 @@ mod basics;
 mod collections;
 mod datetime;
 mod iterators;
+mod lifetimes;
 mod own_bor_ref;
 mod str_sli;
 mod traits;
-
 fn main() {
     basics::main();
     own_bor_ref::main();
@@ -13,4 +13,5 @@ fn main() {
     iterators::main();
     str_sli::main();
     traits::main();
+    lifetimes::main();
 }
