@@ -1,6 +1,7 @@
 use ::std::fs;
 use ::std::io;
 use ::std::thread::{self};
+use std::sync::Arc;
 
 fn prac_mult_thread() -> u64 {
     let chunk = 10000000 / 4;
@@ -59,6 +60,73 @@ fn char_counter(sentence: &str, c: char) -> u32 {
     total_count
 }
 
+fn char_counter_improved(sentence: &str, c: char) -> u32 {
+    let length = sentence.len();
+    let num_threads = 4;
+    let chunk_size = length / num_threads;
+
+    let mut handles = vec![];
+
+    for i in 0..num_threads {
+        let start = i * chunk_size;
+        let end = if i == num_threads - 1 {
+            length
+        } else {
+            (i + 1) * chunk_size
+        };
+
+        let sentence_chunk = sentence[start..end].to_string();
+        let c = c;
+
+        let handle =
+            thread::spawn(move || sentence_chunk.chars().filter(|&ch| ch == c).count() as u32);
+
+        handles.push(handle);
+    }
+
+    let mut total_count = 0;
+    for handle in handles {
+        total_count += handle.join().unwrap();
+    }
+
+    total_count
+}
+
+fn arc_char_counter(sentence: &str, c: char) -> u32 {
+    let length = sentence.len();
+    let num_threads = 4;
+    let chunk_size = length / num_threads;
+
+    let sentence: Arc<str> = Arc::from(sentence);
+
+    let mut handles = vec![];
+
+    for i in 0..num_threads {
+        let sentence = Arc::clone(&sentence);
+        let start = i * chunk_size;
+        let end = if i == num_threads - 1 {
+            length
+        } else {
+            (i + 1) * chunk_size
+        };
+        let c = c;
+
+        let handle = thread::spawn(move || {
+            let sentence_chunk = &sentence[start..end];
+            sentence_chunk.chars().filter(|&ch| ch == c).count() as u32
+        });
+
+        handles.push(handle);
+    }
+
+    let mut total_count = 0;
+    for handle in handles {
+        total_count += handle.join().unwrap();
+    }
+
+    total_count
+}
+
 pub fn main() {
     println!(
         "{}",
@@ -77,6 +145,16 @@ pub fn main() {
     let target_char = 'a';
     let count = char_counter(sentence, target_char);
     println!("The character '{}' appears {} times.", target_char, count);
+
+    let count1_ = char_counter_improved(sentence, target_char);
+    println!(
+        "(improved): The character '{}' appears {} times.",
+        target_char, count1_
+    );
+
+    let sentence = "hello world, hello parallel world!";
+    let count = arc_char_counter(sentence, 'l');
+    println!("The character 'l' appears {} times.", count);
 
     println!(
         "{}",
