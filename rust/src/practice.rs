@@ -97,12 +97,12 @@ fn arc_char_counter(sentence: &str, c: char) -> u32 {
     let num_threads = 4;
     let chunk_size = length / num_threads;
 
-    let sentence: Arc<str> = Arc::from(sentence);
+    let sentence_ref: Arc<str> = Arc::from(sentence);
 
     let mut handles = vec![];
 
     for i in 0..num_threads {
-        let sentence = Arc::clone(&sentence);
+        let sentence = Arc::clone(&sentence_ref);
         let start = i * chunk_size;
         let end = if i == num_threads - 1 {
             length
