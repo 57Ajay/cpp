@@ -5,9 +5,9 @@ mod iterators;
 mod lifetimes;
 mod mlt_thread;
 mod own_bor_ref;
+mod practice;
 mod str_sli;
 mod traits;
-
 fn main() {
     basics::main();
     own_bor_ref::main();
@@ -17,4 +17,5 @@ fn main() {
     traits::main();
     lifetimes::main();
     mlt_thread::main();
+    practice::main();
 }
